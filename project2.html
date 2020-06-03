@@ -51,6 +51,34 @@ Project Description: ...
         {
             this.teamName = pTeamName;
         }
+
+        //Getters and setters 
+        getTeam(){
+            return this.teamName;
+        }
+        setTeam(myTeamName){
+            this.teamName = myTeamName;
+        }
+        //Confused as to how this one is different from the calculate one.
+        //Double check this.. may have made an error or the wording is just off.
+        setWinsLosses(myWins, myLosses){
+            this.wins = myWins;
+            this.losses = myLosses;
+            this.winLossPct = (this.wins / (this.wins + this.losses));
+        }
+        getWins(){
+            return this.wins;
+        }
+        getLosses(){
+            return this.losses;
+        }
+        //I am assuming we will want to round this later
+        calcWinLossPct(){
+            this.winLossPct = (this.wins / (this.wins + this.losses));
+        }
+
+
+
     }
     //Create "Team" class
         //Instance variables/attributes:
@@ -80,7 +108,19 @@ Project Description: ...
         constructor(pTeamName)
         {
             super(pTeamName);
-        }   
+        }
+
+        addPointsFor(pointsToAdd){
+            this.totalPointsFor = this.totalPointsFor + pointsToAdd;
+        }
+        addPointsAgainst(oppPointsToAdd){
+            this.totalPointsAgainst = this.totalPointsAgainst + oppPointsToAdd;
+        }
+        getAllPoints(){
+            var pointOutput;
+            pointOutput = "Points for " + this.totalPointsFor + " and Points Against " + this.totalPointsAgainst;
+            return pointOutput;
+        }
     }
 
     //Create "BasketballTeam" class that inherits from the "Team" class
