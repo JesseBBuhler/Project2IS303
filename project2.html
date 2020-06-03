@@ -233,15 +233,32 @@ Project Description: ...
                                 { iOverTime = iOverTime + 1; }
                             }
                         }
-                        teamObjects[iOuter].games[iInner] = new Game(ourScore, oppScore, outcome);
+                        //Saves game to the home team
+                        teamObjects[iOuter].games.push(new Game(ourScore, oppScore, outcome));
+
+                        //Save game to the away team
+                        var oppOutcome;
+                        if (outcome == "W")
+                            { oppOutcome = "L"; }
+                        else if (outcome == "L")
+                            { oppOutcome = "W"; }
+
+                        teamObjects[iInner].games.push(new Game(oppScore, ourScore, oppOutcome));
+
+
 
                         //So this is working, taking 1 team at a time and pitting them against every other team - 
                         //assuming the iOuter team is the home team and adding the game object to that team; 
                         //Should the game object be added to both the home team and the away team?
-                        alert(teamObjects[iOuter].teamName + " = " + teamObjects[iOuter].games[iInner].myScore + "\n" + 
-                                teamObjects[iInner].teamName + " = " + teamObjects[iOuter].games[iInner].theirScore + "\n" +
-                                teamObjects[iOuter].games[iInner].winOrLoss + "\n" + "\n" +
+                        alert(teamObjects[iOuter].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].myScore + "\n" + 
+                                teamObjects[iInner].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].theirScore + "\n" +
+                                teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].winOrLoss + "\n" + "\n" +
                                 "This game object is being stored to the home team: " + teamObjects[iOuter].teamName);
+
+                        alert(teamObjects[iInner].teamName + " = " + teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].myScore + "\n" +
+                                teamObjects[iOuter].teamName + " = " + teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].theirScore + "\n" + 
+                                teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].winOrLoss + "\n" + "\n" + 
+                                "This game object is being stored to the away team: " + teamObjects[iInner].teamName);
                     }
                 }
             }
