@@ -42,9 +42,9 @@ Project Description: ...
     class Team 
     {
         teamName;
-        wins;
-        losses;
-        winLossPct;
+        wins = 0;
+        losses = 0;
+        winLossPct = 0;
         games = [];
 
         constructor(pTeamName) 
@@ -62,8 +62,8 @@ Project Description: ...
         //Confused as to how this one is different from the calculate one.
         //Double check this.. may have made an error or the wording is just off.
         setWinsLosses(myWins, myLosses){
-            this.wins = myWins;
-            this.losses = myLosses;
+            this.wins = this.wins + myWins;
+            this.losses = this.losses + myLosses;
             this.winLossPct = (this.wins / (this.wins + this.losses));
         }
         getWins(){
@@ -102,8 +102,8 @@ Project Description: ...
 
     class BasketballTeam extends Team
     {
-        totalPointsFor;
-        totalPointsAgainst;
+        totalPointsFor = 0;
+        totalPointsAgainst = 0;
         
         constructor(pTeamName)
         {
@@ -235,6 +235,30 @@ Project Description: ...
                         }
                         //Saves game to the home team
                         teamObjects[iOuter].games.push(new Game(ourScore, oppScore, outcome));
+
+                        //Add points for and against to the home team.
+                        teamObjects[iOuter].addPointsFor(ourScore);
+                        teamObjects[iOuter].addPointsAgainst(oppScore);
+
+                        //Add points for and against to the away team.
+                        teamObjects[iInner].addPointsFor(oppScore);
+                        teamObjects[iInner].addPointsAgainst(ourScore);
+
+                        //Updates the wins and losses for both teams
+                        if( outcome === "W"){
+                            teamObjects[iOuter].setWinsLosses(1,0);
+                            teamObjects[iInner].setWinsLosses(0,1);
+                            //Caluclate the win loss %
+                            teamObjects[iOuter].calcWinLossPct();
+                            teamObjects[iInner].calcWinLossPct();
+                        }
+                        else{
+                            teamObjects[iOuter].setWinsLosses(0,1);
+                            teamObjects[iInner].setWinsLosses(1,0);
+                            //Caluclate the win loss %
+                            teamObjects[iOuter].calcWinLossPct();
+                            teamObjects[iInner].calcWinLossPct();
+                        }
 
                         //Save game to the away team
                         var oppOutcome;
