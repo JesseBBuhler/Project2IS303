@@ -39,6 +39,19 @@ Project Description: ...
 
     <script>
 
+    class Team 
+    {
+        teamName;
+        wins;
+        losses;
+        winLossPct;
+        games = [];
+
+        constructor(pTeamName) 
+        {
+            this.teamName = pTeamName;
+        }
+    }
     //Create "Team" class
         //Instance variables/attributes:
         /*  teamName; (string)
@@ -57,6 +70,18 @@ Project Description: ...
             getWins - when called, return number of wins ("wins")
             getLosses - when called, return number of losses ("losses")
             calcWinLossPct - calculates and updates "winLossPct"
+        */
+
+    class BasketballTeam extends Team
+    {
+        totalPointsFor;
+        totalPointsAgainst;
+        
+        constructor(pTeamName)
+        {
+            super(pTeamName);
+        }   
+    }
 
     //Create "BasketballTeam" class that inherits from the "Team" class
 
@@ -72,7 +97,22 @@ Project Description: ...
                             EXAMPLE:
                             "Points for XX and Points Against XX" 
                             "Points for " + totalPointsFor + " and Points Against " + totalPointsAgainst
+                            */
 
+    class Game
+    {
+        myScore;
+        theirScore;
+        winOrLoss;
+
+        constructor(ourScore, oppScore, outcome)
+        {
+            this.myScore = ourScore;
+            this.theirScore = oppScore;
+            this.winOrLoss = outcome;
+        }
+    }
+    
     //Create "Game" class which will be an array of game objects IN the "Team" class
         //Instance Variables/Attributes
         /*  myScore; (int)
@@ -84,11 +124,90 @@ Project Description: ...
         */
 
 
-        /*function playGame()
+        function playGame()
         {
+            var wccTeams = ["BYU", "Gonzaga", "Loyola", "Pacific", "Pepperdine","Portland", "Saint Marys", "San Diego", "San Francisco", "Santa Clara"];
+            var teamObjects = [];
+            var iOuter;
+            var iInner;
+
+            //Creates an array of BasketballTeam objects using the given Team names
+            for (var i = 0; i < wccTeams.length; i++)
+            {
+                teamObjects[i] = new BasketballTeam(wccTeams[i]);
+                //alert(teamObjects[i].teamName);
+            }
+
+            //Each Team plays against the other 9 Teams
+            for (iOuter = 0; iOuter < teamObjects.length; iOuter++)
+            {
+                for (iInner = 0; iInner < teamObjects.length; iInner++)
+                {
+                    //Can't have the Team play itself
+                    if (iInner != iOuter)
+                    {
+                        var ourScore;
+                        var oppScore;
+                        var iCount; 
+                        var outcome;
+
+                        ourScore = Math.floor(Math.random()*101);
+                        oppScore = Math.floor(Math.random()*101);
+
+                        //Assumes the outer Team will be at home...
+                        ourScore = ourScore + 5
+
+                        //Determine whether the game was a win, loss, or tie, and adjust win counter as necessary
+                        if (ourScore > oppScore)
+                        { 
+                            outcome = "W"
+                        }
+                        else if (ourScore < oppScore)
+                        { 
+                            outcome = "L"
+                        }
+                        else 
+                        {
+                            //Variables relevant to the "tied" scenario
+                            var bTied = true;
+                            var iOverTime = 1;
+
+                            //Overtime - generate new scores and recompare until there is a win or loss
+                            while (bTied == true)
+                            {
+                                ourScore = ourScore + Math.floor(Math.random()*16);
+                                oppScore = oppScore + Math.floor(Math.random()*16);
+
+                                if (ourScore > oppScore)
+                                {  
+                                    outcome = "W"
+                                    bTied = false;
+                                }
+                                else if (ourScore < oppScore)
+                                { 
+                                    outcome = "L"
+                                    bTied = false;
+                                }
+                                //If scores are still tied, loop is not broken and teams go into overtime again
+                                else 
+                                { iOverTime = iOverTime + 1; }
+                            }
+                        }
+                        teamObjects[iOuter].games[iInner] = new Game(ourScore, oppScore, outcome);
+
+                        //So this is working, taking 1 team at a time and pitting them against every other team - 
+                        //assuming the iOuter team is the home team and adding the game object to that team; 
+                        //Should the game object be added to both the home team and the away team?
+                        alert(teamObjects[iOuter].teamName + " = " + teamObjects[iOuter].games[iInner].myScore + "\n" + 
+                                teamObjects[iInner].teamName + " = " + teamObjects[iOuter].games[iInner].theirScore + "\n" +
+                                teamObjects[iOuter].games[iInner].winOrLoss + "\n" + "\n" +
+                                "This game object is being stored to the home team: " + teamObjects[iOuter].teamName);
+                    }
+                }
+            }
 
         }
-        */
+
 
 /*
 When the user clicks on the Play Game button you need to simulate an entire season.
