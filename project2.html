@@ -16,26 +16,65 @@ Project Description: ...
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 2 - Work as a Team</title>
+    <style>
+        body
+        {
+            /*
+            #17408B - blue
+            #C9082A - red
+            #FFFFFF - white
+            */
+            background-image: url("wooden-basketball-court-wallpaper-mural.jpg");
+            background-size:cover;
+        }
+
+        .teams
+        {
+            background-color: #17408B;
+            width: 30%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: larger;
+            font-weight: bold;
+            color: white;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        li
+        {
+            font-size: medium;
+            font-weight: normal;
+        }
+
+    </style>
 </head>
 <body>
     <!--This HTML code was given in the assignment description-->
-    <ul id="teamList">
-        <li>BYU</li>
-        <li>Gonzaga</li>
-        <li>Loyola</li>
-        <li>Pacific</li>
-        <li>Pepperdine</li>
-        <li>Portland</li>
-        <li>Saint Marys</li>
-        <li>San Diego</li>
-        <li>San Francisco</li>
-        <li>Santa Clara</li>
-    </ul>
+    <div class="teams">
+        Teams:
+        <br>
+        <ul id="teamList">
+            <li>BYU</li>
+            <li>Gonzaga</li>
+            <li>Loyola</li>
+            <li>Pacific</li>
+            <li>Pepperdine</li>
+            <li>Portland</li>
+            <li>Saint Marys</li>
+            <li>San Diego</li>
+            <li>San Francisco</li>
+            <li>Santa Clara</li>
+        </ul>
+    </div>
+
     <br><br>
-    <input type="button" value="Play Game" onclick="playGame()">
-    <br><br>
-    <p>Season Results:</p>
-    <p id="output"></p>    
+    <div>
+        <input type="button" value="Play Game" onclick="playGame()">
+        <br><br>
+        <p>Season Results:</p>
+        <p id="output"></p>  
+    </div>
+      
 
     <script>
 
