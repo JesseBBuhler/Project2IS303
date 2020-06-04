@@ -28,6 +28,11 @@ Project Description: ...
             background-size:cover;
         }
 
+        #intro
+        {
+            text-align: center;
+        }
+
         .teams
         {
             background-color: #17408B;
@@ -49,6 +54,13 @@ Project Description: ...
     </style>
 </head>
 <body>
+    <!--Top Intro Code-->
+    <div id="intro">
+        <h1>Welcome to Basketball Season Simulator!</h1>
+        <h3>Instructions</h3>
+        <h4>Pick a team to root for from the list, click the "Play Game" button, and see how well your team does!</h4>
+    </div>
+
     <!--This HTML code was given in the assignment description-->
     <div class="teams">
         Teams:
@@ -350,7 +362,7 @@ Project Description: ...
             {
                 for (i2 = i1 + 1; i2 < teamObjects.length; i2++)
                 {
-                    if (teamObjects[i1].getWins() < teamObjects[i2].getWins())
+                    if (teamObjects[i1].getWins() < teamObjects[i2].getWins()) //OR... only use iHoldWins to switch objects
                     {
                         iHoldWins = teamObjects[i2];
                         sHoldTeam = teamObjects[i2]; //Should this be "sHoldTeam = wwcTeams[i2]" ? Otherwise iHoldWins === sHoldTeam, which makes no sense
