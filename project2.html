@@ -284,6 +284,7 @@ Project Description: ...
                         //So this is working, taking 1 team at a time and pitting them against every other team - 
                         //assuming the iOuter team is the home team and adding the game object to that team; 
                         //Should the game object be added to both the home team and the away team?
+                        /*
                         alert(teamObjects[iOuter].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].myScore + "\n" + 
                                 teamObjects[iInner].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].theirScore + "\n" +
                                 teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].winOrLoss + "\n" + "\n" +
@@ -293,6 +294,7 @@ Project Description: ...
                                 teamObjects[iOuter].teamName + " = " + teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].theirScore + "\n" + 
                                 teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].winOrLoss + "\n" + "\n" + 
                                 "This game object is being stored to the away team: " + teamObjects[iInner].teamName);
+                        */
                     }
                 }
             }
@@ -320,7 +322,7 @@ Project Description: ...
             var output = [];
             for (i=0; i < wccTeams.length; i++)
             {
-            output[i] = teamObjects[i].teamName;
+            output[i] = teamObjects[i].teamName + " " + teamObjects[i].wins + " " + teamObjects[i].winLossPct;
             }
             document.getElementById("output").innerHTML = output.join("<br>");
         }
