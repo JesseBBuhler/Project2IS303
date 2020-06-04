@@ -295,6 +295,11 @@ Project Description: ...
                                 teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].winOrLoss + "\n" + "\n" + 
                                 "This game object is being stored to the away team: " + teamObjects[iInner].teamName);
                         */
+                        /*alert(teamObjects[iOuter].teamName + " " + teamObjects[iOuter].wins + "/" + (teamObjects[iOuter].losses + teamObjects[iOuter].wins) + " " + 
+                                teamObjects[iOuter].winLossPct + "\n" +
+                                teamObjects[iInner].teamName + " " + teamObjects[iInner].wins + "/" + (teamObjects[iInner].losses + teamObjects[iInner].wins) + " " + 
+                                teamObjects[iInner].winLossPct);
+                        */
                     }
                 }
             }
@@ -302,27 +307,27 @@ Project Description: ...
             //Bubble sort
             var sHoldTeam;
             var iHoldWins;
-            for (i1 = 0; i1 < wccTeams.length - 1; i1++)
+            for (i1 = 0; i1 < teamObjects.length - 1; i1++)
             {
-                for (i2 = i1 + 1; i2 < wccTeams.length; i2++)
+                for (i2 = i1 + 1; i2 < teamObjects.length; i2++)
                 {
                     if (teamObjects[i1].getWins() < teamObjects[i2].getWins())
                     {
-                        iHoldWins = teamObjects[i2].getWins();
-                        sHoldTeam = teamObjects[i2].getTeam();
+                        iHoldWins = teamObjects[i2];
+                        sHoldTeam = teamObjects[i2];
 
-                        teamObjects[i2].wins = teamObjects[i1].getWins();
-                        teamObjects[i2].teamName= teamObjects[i1].getTeam();
+                        teamObjects[i2] = teamObjects[i1];
+                        teamObjects[i2] = teamObjects[i1];
 
-                        teamObjects[i1].wins= iHoldWins;
-                        teamObjects[i1].teamName= sHoldTeam;
+                        teamObjects[i1] = iHoldWins;
+                        teamObjects[i1] = sHoldTeam;
                     }
                 }
             }
             var output = [];
-            for (i=0; i < wccTeams.length; i++)
+            for (i=0; i < teamObjects.length; i++)
             {
-            output[i] = teamObjects[i].teamName + " " + teamObjects[i].wins + " " + teamObjects[i].winLossPct;
+            output[i] = teamObjects[i].teamName + " " + teamObjects[i].wins + " " + (teamObjects[i].winLossPct * 100).toFixed(2) + "%";
             }
             document.getElementById("output").innerHTML = output.join("<br>");
         }
