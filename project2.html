@@ -180,8 +180,8 @@ Project Description: ...
 
     class Game
     {
-        myScore;
-        theirScore;
+        myScore = 0; //Added 0
+        theirScore = 0; //Added 0
         winOrLoss;
 
         constructor(ourScore, oppScore, outcome)
@@ -234,7 +234,7 @@ Project Description: ...
                         oppScore = Math.floor(Math.random()*101);
 
                         //Assumes the outer Team will be at home...
-                        ourScore = ourScore + 5
+                        ourScore = ourScore + 5 //Not important, but, couldn't we just add this to the random number generator line in 233?
 
                         //Determine whether the game was a win, loss, or tie, and adjust win counter as necessary
                         if (ourScore > oppScore)
@@ -249,7 +249,7 @@ Project Description: ...
                         {
                             //Variables relevant to the "tied" scenario
                             var bTied = true;
-                            var iOverTime = 1;
+                            var iOverTime = 1; //Why do we need to know how many overtimes there has been?
 
                             //Overtime - generate new scores and recompare until there is a win or loss
                             while (bTied == true)
@@ -303,7 +303,7 @@ Project Description: ...
                         var oppOutcome;
                         if (outcome == "W")
                             { oppOutcome = "L"; }
-                        else if (outcome == "L")
+                        else if (outcome == "L") //Could this just be an else statement?
                             { oppOutcome = "W"; }
 
                         teamObjects[iInner].games.push(new Game(oppScore, ourScore, oppOutcome));
@@ -353,13 +353,13 @@ Project Description: ...
                     if (teamObjects[i1].getWins() < teamObjects[i2].getWins())
                     {
                         iHoldWins = teamObjects[i2];
-                        sHoldTeam = teamObjects[i2];
+                        sHoldTeam = teamObjects[i2]; //Should this be "sHoldTeam = wwcTeams[i2]" ? Otherwise iHoldWins === sHoldTeam, which makes no sense
 
-                        teamObjects[i2] = teamObjects[i1];
-                        teamObjects[i2] = teamObjects[i1];
+                        teamObjects[i2] = teamObjects[i1]; //Again, just a repeat
+                        teamObjects[i2] = teamObjects[i1]; //Maybe, "wwcTeams[i2] = wwcTeams[i1]"?
 
                         teamObjects[i1] = iHoldWins;
-                        teamObjects[i1] = sHoldTeam;
+                        teamObjects[i1] = sHoldTeam; //Maybe, "wwcTeams[i1] = sHoldTeam"?
                     }
                 }
             }
