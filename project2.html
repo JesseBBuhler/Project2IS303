@@ -317,8 +317,12 @@ Project Description: ...
                     }
                 }
             }
-
-            document.getElementById("output").innerHTML = teamObjects;
+            var output = [];
+            for (i=0; i < wccTeams.length; i++)
+            {
+            output[i] = teamObjects[i].teamName;
+            }
+            document.getElementById("output").innerHTML = output.join("<br>");
         }
 
 
