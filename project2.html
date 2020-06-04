@@ -269,29 +269,6 @@ Project Description: ...
 
                         teamObjects[iInner].games.push(new Game(oppScore, ourScore, oppOutcome));
 
-
-                        //Bubble sort
-                        var sHoldTeam;
-                        var iHoldWins;
-                        for (i1 = 0; i1 < wccTeams.length - 1; i1++)
-                        {
-                            for (i2 = i1 + 1; i2 < wccTeams.length; i2++)
-                            {
-                                if (teamObjects.wins[i1] < teamObjects.wins[i2])
-                                {
-                                    iHoldWins = teamObjects.wins[i2];
-                                    sHoldTeam = teamObjects.teamName[i2];
-
-                                    teamObjects.wins[i2] = teamObjects.wins[i1];
-                                    teamObjects.teamName[i2] = teamObjects.teamName[i1];
-
-                                    teamObjects.wins[i1] = iHoldWins;
-                                    teamObjects.teamName[i1] = sHoldTeam;
-                                }
-                            }
-                        }
-
-                        document.getElementById("output").innerHTML = teamObjects.join('').teamName.wins;
                         
                         /*When the game is over you will update the totalPointsFor and the totalPointsAgainst attributes 
                         by calling the methods (NOT using the attribute).
@@ -307,7 +284,7 @@ Project Description: ...
                         //So this is working, taking 1 team at a time and pitting them against every other team - 
                         //assuming the iOuter team is the home team and adding the game object to that team; 
                         //Should the game object be added to both the home team and the away team?
-                        alert(teamObjects[iOuter].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].myScore + "\n" + 
+                        /*alert(teamObjects[iOuter].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].myScore + "\n" + 
                                 teamObjects[iInner].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].theirScore + "\n" +
                                 teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].winOrLoss + "\n" + "\n" +
                                 "This game object is being stored to the home team: " + teamObjects[iOuter].teamName);
@@ -315,11 +292,33 @@ Project Description: ...
                         alert(teamObjects[iInner].teamName + " = " + teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].myScore + "\n" +
                                 teamObjects[iOuter].teamName + " = " + teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].theirScore + "\n" + 
                                 teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].winOrLoss + "\n" + "\n" + 
-                                "This game object is being stored to the away team: " + teamObjects[iInner].teamName);
+                                "This game object is being stored to the away team: " + teamObjects[iInner].teamName);*/
                     }
                 }
             }
 
+            //Bubble sort
+            var sHoldTeam;
+            var iHoldWins;
+            for (i1 = 0; i1 < wccTeams.length - 1; i1++)
+            {
+                for (i2 = i1 + 1; i2 < wccTeams.length; i2++)
+                {
+                    if (teamObjects[i1].getWins() < teamObjects[i2].getWins())
+                    {
+                        iHoldWins = teamObjects[i2].getWins();
+                        sHoldTeam = teamObjects[i2].getTeam();
+
+                        teamObjects[i2].wins = teamObjects[i1].getWins();
+                        teamObjects[i2].teamName= teamObjects[i1].getTeam();
+
+                        teamObjects[i1].wins= iHoldWins;
+                        teamObjects[i1].teamName= sHoldTeam;
+                    }
+                }
+            }
+
+            document.getElementById("output").innerHTML = teamObjects.join('').teamName;
         }
 
 
