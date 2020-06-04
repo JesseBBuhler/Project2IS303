@@ -33,22 +33,60 @@ Project Description: ...
             text-align: center;
         }
 
+        #mainContainer
+        {
+            overflow: auto;
+        }
+
         .teams
         {
             background-color: #17408B;
-            width: 30%;
+            width: 40%;
             font-family: Arial, Helvetica, sans-serif;
             font-size: larger;
             font-weight: bold;
             color: white;
-            margin: 10px;
+            margin-left: 10px;
             padding: 10px;
+            float: left;
+            display: block;
         }
 
         li
         {
             font-size: medium;
             font-weight: normal;
+            list-style: circle;
+        }
+
+        #teamList
+        {
+            display: block;
+        }
+
+        #inputButton
+        {
+            float: left;
+            width: 30%;
+            vertical-align: middle;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 35%;
+            margin-left: 15%;
+        }
+
+        input
+        {
+            vertical-align: middle;
+        }
+
+        #rightSide
+        {
+            float: left;
+            width: 15%;
+            height: 35%;
         }
 
     </style>
@@ -62,31 +100,38 @@ Project Description: ...
     </div>
 
     <!--This HTML code was given in the assignment description-->
-    <div class="teams">
-        Teams:
-        <br>
-        <ul id="teamList">
-            <li>BYU</li>
-            <li>Gonzaga</li>
-            <li>Loyola</li>
-            <li>Pacific</li>
-            <li>Pepperdine</li>
-            <li>Portland</li>
-            <li>Saint Marys</li>
-            <li>San Diego</li>
-            <li>San Francisco</li>
-            <li>Santa Clara</li>
-        </ul>
-    </div>
+    
+    <div id="mainContainer">
+        <div class="teams">
+            Teams:
+            <br>
+            <ul id="teamList">
+                <li>BYU</li>
+                <li>Gonzaga</li>
+                <li>Loyola</li>
+                <li>Pacific</li>
+                <li>Pepperdine</li>
+                <li>Portland</li>
+                <li>Saint Marys</li>
+                <li>San Diego</li>
+                <li>San Francisco</li>
+                <li>Santa Clara</li>
+            </ul>
+        </div>
 
-    <br><br>
-    <div>
-        <input type="button" value="Play Game" onclick="playGame()">
-        <br><br>
-        <p>Season Results:</p>
-        <p id="output"></p>  
+        <!--<br><br-->
+        <div id="inputButton">
+            <input type="button" value="Play Game" onclick="playGame()">
+        </div>
+        <div id="rightSide">
+            <!--<br><br>-->
+            <p>Season Results:</p>
+            <p id="output"></p>  
+        </div>
     </div>
-      
+    <footer>
+        Footer Test
+    </footer>
 
     <script>
 
@@ -362,16 +407,18 @@ Project Description: ...
             {
                 for (i2 = i1 + 1; i2 < teamObjects.length; i2++)
                 {
-                    if (teamObjects[i1].getWins() < teamObjects[i2].getWins()) //OR... only use iHoldWins to switch objects
+                    if (teamObjects[i1].getWins() < teamObjects[i2].getWins())
                     {
+
+                        //Set hold for team that is getting moved up
                         iHoldWins = teamObjects[i2];
-                        sHoldTeam = teamObjects[i2]; //Should this be "sHoldTeam = wwcTeams[i2]" ? Otherwise iHoldWins === sHoldTeam, which makes no sense
-
-                        teamObjects[i2] = teamObjects[i1]; //Again, just a repeat
-                        teamObjects[i2] = teamObjects[i1]; //Maybe, "wwcTeams[i2] = wwcTeams[i1]"?
-
+                        
+                        //Move team that needs to be moved down
+                        teamObjects[i2] = teamObjects[i1];
+                        
+                        //Move team that needs to be moved up using the holding variable
                         teamObjects[i1] = iHoldWins;
-                        teamObjects[i1] = sHoldTeam; //Maybe, "wwcTeams[i1] = sHoldTeam"?
+                        
                     }
                 }
             }
