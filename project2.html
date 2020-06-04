@@ -32,6 +32,7 @@ Project Description: ...
         #intro
         {
             text-align: center;
+            margin-top: 60px;
         }
 
         #mainContainer
@@ -41,13 +42,14 @@ Project Description: ...
 
         .teams
         {
+            border: solid black 3px;
             background-color: #17408B;
             width: 31%;
             font-family: Arial, Helvetica, sans-serif;
             font-size: larger;
             font-weight: bold;
             color: white;
-            margin-left: 3%;
+            margin-left: 4%;
             padding: 10px;
             float: left;
             display: block;
@@ -67,6 +69,8 @@ Project Description: ...
 
         #inputButton
         {
+            font-family: fantasy;
+            font-size: x-large;
             float: left;
             width: 30%;
             vertical-align: middle;
@@ -74,7 +78,7 @@ Project Description: ...
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 35%;
+            height: 10%;
             margin-left: 0%;
         }
 
@@ -85,11 +89,17 @@ Project Description: ...
 
         #rightSide
         {
-            float: left;
-            width: 30%;
-            height: 32%;
             border: solid black 3px;
+            background-color: #B22234;
+            width: 31%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: larger;
+            font-weight: bold;
+            color: white;
+            margin-right: 4%;
             padding: 10px;
+            float: right;
+            display: block;
         }
 
     </style>
@@ -123,9 +133,7 @@ Project Description: ...
         </div>
 
         <!--<br><br-->
-        <div id="inputButton">
-            <input type="button" value="Play Game" onclick="playGame()">
-        </div>
+        <input type="button" value="Play Game" onclick="playGame()" id="inputButton">
         <div id="rightSide">
             <!--<br><br>-->
             <p>Season Results:</p>
