@@ -224,25 +224,6 @@ Project Description: ...
 
 
     }
-    //Create "Team" class
-        //Instance variables/attributes:
-        /*  teamName; (string)
-            wins; (int)
-            losses; (int)
-            winLossPct; (double)
-            games; (array of Game objects)
-        */
-
-        //Methods 
-        /*  getTeam - when called, returns team name
-            setTeam - when called, recieves 1 parameter used to set the "teamName"
-            setWinsLosses - when called, recieves 2 parameters used to set the "wins" and "losses";
-                            "wins" is the first parameter, "losses" is the second
-                            This method will also calculate the "winLossPct"
-            getWins - when called, return number of wins ("wins")
-            getLosses - when called, return number of losses ("losses")
-            calcWinLossPct - calculates and updates "winLossPct"
-        */
 
     class BasketballTeam extends Team
     {
@@ -267,22 +248,6 @@ Project Description: ...
         }
     }
 
-    //Create "BasketballTeam" class that inherits from the "Team" class
-
-        //Make sure to call parent class!
-        //Instance Variables/Attributes
-        /*  totalPointsFor; (int)
-            totalPointsAgainst; (int)
-        */
-        //Methods
-        /*  addPointsFor - when called, receives 1 (int) parameter; this value is added to the "TotalPointsFor" attribute
-            addPointsAgainst - when called, receives 1 (int) parameter; this value is added to the "TotalPointsAgainst" attribute
-            getAllPoints = when called, return a string with the "totalPointsFor" and the "totalPointsAgainst" like this:
-                            EXAMPLE:
-                            "Points for XX and Points Against XX" 
-                            "Points for " + totalPointsFor + " and Points Against " + totalPointsAgainst
-                            */
-
     class Game
     {
         myScore = 0; //Added 0
@@ -297,15 +262,6 @@ Project Description: ...
         }
     }
     
-    //Create "Game" class which will be an array of game objects IN the "Team" class
-        //Instance Variables/Attributes
-        /*  myScore; (int)
-            theirScore; (int)
-            winOrLoss; (string- W or L)
-        
-        This class should have a constructor that recieves all 3 parameters to populate the attributes
-            (myScore, theirScore, winOrLoss)
-        */
 
 
         function playGame()
@@ -412,38 +368,6 @@ Project Description: ...
                             { oppOutcome = "W"; }
 
                         teamObjects[iInner].games.push(new Game(oppScore, ourScore, oppOutcome));
-
-                        
-                        /*When the game is over you will update the totalPointsFor and the totalPointsAgainst attributes 
-                        by calling the methods (NOT using the attribute).
-
-                        You will also update the wins and the losses for each team as a game is completed. 
-                        You will call the calcWinLossPct method to update the winLossPct attribute.
-
-                        You will also need to add a new game object to the games attribute for the team and make sure the constructor 
-                        is appropriately called to populate myScore, theirScore, and winOrLoss. */
-
-
-
-                        //So this is working, taking 1 team at a time and pitting them against every other team - 
-                        //assuming the iOuter team is the home team and adding the game object to that team; 
-                        //Should the game object be added to both the home team and the away team?
-                        /*
-                        alert(teamObjects[iOuter].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].myScore + "\n" + 
-                                teamObjects[iInner].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].theirScore + "\n" +
-                                teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].winOrLoss + "\n" + "\n" +
-                                "This game object is being stored to the home team: " + teamObjects[iOuter].teamName);
-
-                        alert(teamObjects[iInner].teamName + " = " + teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].myScore + "\n" +
-                                teamObjects[iOuter].teamName + " = " + teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].theirScore + "\n" + 
-                                teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].winOrLoss + "\n" + "\n" + 
-                                "This game object is being stored to the away team: " + teamObjects[iInner].teamName);
-                        */
-                        /*alert(teamObjects[iOuter].teamName + " " + teamObjects[iOuter].wins + "/" + (teamObjects[iOuter].losses + teamObjects[iOuter].wins) + " " + 
-                                teamObjects[iOuter].winLossPct + "\n" +
-                                teamObjects[iInner].teamName + " " + teamObjects[iInner].wins + "/" + (teamObjects[iInner].losses + teamObjects[iInner].wins) + " " + 
-                                teamObjects[iInner].winLossPct);
-                        */
                     }
                 }
             }
@@ -473,7 +397,7 @@ Project Description: ...
             var output = [];
             for (i=0; i < teamObjects.length; i++)
             {
-            output[i] = teamObjects[i].teamName + " with " + teamObjects[i].wins + " wins"/* + (teamObjects[i].winLossPct * 100).toFixed(2) + "%"*/;
+            output[i] = teamObjects[i].teamName + " with " + teamObjects[i].wins + " wins";
             }
             document.getElementById("output").innerHTML = output.join("<br>");
         }
