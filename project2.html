@@ -353,11 +353,11 @@ Project Description: ...
                         else 
                         {
                             //Variables relevant to the "tied" scenario
-                            var bTied = true;
+                            var tied = true;
                             var iOverTime = 1; //Why do we need to know how many overtimes there has been?
 
                             //Overtime - generate new scores and recompare until there is a win or loss
-                            while (bTied == true)
+                            while (tied == true)
                             {
                                 ourScore = ourScore + Math.floor(Math.random()*16);
                                 oppScore = oppScore + Math.floor(Math.random()*16);
@@ -365,12 +365,12 @@ Project Description: ...
                                 if (ourScore > oppScore)
                                 {  
                                     outcome = "W"
-                                    bTied = false;
+                                    tied = false;
                                 }
                                 else if (ourScore < oppScore)
                                 { 
                                     outcome = "L"
-                                    bTied = false;
+                                    tied = false;
                                 }
                                 //If scores are still tied, loop is not broken and teams go into overtime again
                                 else 
