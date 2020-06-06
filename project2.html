@@ -9,8 +9,10 @@
 
 Project 2 - Work as a Team
 
-Project Description: ...
-
+Project Description: This program creates team, basketballTeam, and game classes to be used in the program. 
+    The program has each team play the other team twice randomly generating scores between 0 and 100 for each team 
+    (with OT for ties, and a 5 point bonus for the home team). 
+    The program then bubble sorts the data and displays the teams and their amount of wins in descending order.
 -->
 <head>
     <meta charset="UTF-8">
@@ -170,6 +172,8 @@ Project Description: ...
         <img id="ncaaImg" src="/Basketball Images/ncaa logo image.png" alt="NCAA">
         <img id="ballImg" src="/Basketball Images/plain basketball.png" alt="Basketball">
     </div>
+
+    <!--footer with BYU NCAA Association 2020-->
     <footer>
         &copy; BYU NCAA Association 2020
     </footer>
@@ -177,7 +181,7 @@ Project Description: ...
 
     <script>
 
-    //Object Team
+    //Class Team
     class Team 
     {
         teamName;
@@ -224,7 +228,7 @@ Project Description: ...
         }
     }
 
-    //Object BasketballTeam that is a child of the Team object
+    //class BasketballTeam that is a child of the Team class
     class BasketballTeam extends Team
     {
         totalPointsFor = 0;
@@ -253,7 +257,7 @@ Project Description: ...
         }
     }
 
-    //Object Game
+    //class Game
     class Game
     {
         myScore = 0; 
