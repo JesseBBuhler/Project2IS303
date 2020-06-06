@@ -9,8 +9,10 @@
 
 Project 2 - Work as a Team
 
-Project Description: ...
-
+Project Description: This program creates team, basketballTeam, and game classes to be used in the program. 
+    The program has each team play the other team twice randomly generating scores between 0 and 100 for each team 
+    (with OT for ties, and a 5 point bonus for the home team). 
+    The program then bubble sorts the data and displays the teams and their amount of wins in descending order.
 -->
 <head>
     <meta charset="UTF-8">
@@ -19,16 +21,11 @@ Project Description: ...
     <style>
         body
         {
-            /*
-            #17408B - blue
-            #C9082A - red
-            #FFFFFF - white
-            */
             background-image: url("/Basketball Images/wooden-basketball-court-wallpaper-mural.jpg");
             background-size:cover;
-            
         }
 
+        /*Top area with introductory text: title and instructions*/
         #intro
         {
             text-align: center;
@@ -43,11 +40,13 @@ Project Description: ...
             font-size: 40px;
         }
 
+        /*Middle area that contains the team list, play button, and season results*/
         #mainContainer
         {
             overflow: auto;
         }
 
+        /*Box that contains the list of teams*/
         .teams
         {
             border: solid black 3px;
@@ -65,11 +64,13 @@ Project Description: ...
             height: fit-content;
         }
 
+        /*List of teams text*/
         #teamList
         {
             display: block;
         }
 
+        /*Play game button in the center*/
         #inputButton
         {
             font-family: fantasy;
@@ -92,6 +93,7 @@ Project Description: ...
             vertical-align: middle;
         }
 
+        /*Box that displays the season results*/
         #rightSide
         {
             border: solid black 3px;
@@ -108,6 +110,7 @@ Project Description: ...
             height: fit-content;
         }
 
+        /*Basketball Image at the bottom*/
         #ballImg
         {
             margin-top: 3%;
@@ -115,6 +118,7 @@ Project Description: ...
             height: 250px;
         }
 
+        /*NCAA Logo Image at the bottom*/
         #ncaaImg
         {
             margin-top: 3%;
@@ -136,7 +140,7 @@ Project Description: ...
     </style>
 </head>
 <body>
-    <!--Top Intro Code-->
+    <!--Top Intro Code that gives a title and instructions-->
     <div id="intro">
         <h1>Welcome to Basketball Season Simulator!</h1>
         <br>
@@ -165,10 +169,9 @@ Project Description: ...
             </ul>
         </div>
 
-        <!--<br><br-->
         <input type="button" value="Play Season" onclick="playGame()" id="inputButton">
         <div id="rightSide">
-            <!--<br><br>-->
+            
             <p>Season Results:</p>
             <p id="output"></p>  
         </div>
@@ -177,12 +180,16 @@ Project Description: ...
         <img id="ncaaImg" src="/Basketball Images/ncaa logo image.png" alt="NCAA">
         <img id="ballImg" src="/Basketball Images/plain basketball.png" alt="Basketball">
     </div>
+
+    <!--footer with BYU NCAA Association 2020-->
     <footer>
         &copy; BYU NCAA Association 2020
     </footer>
 
+
     <script>
 
+    //Class Team
     class Team 
     {
         teamName;
@@ -196,54 +203,40 @@ Project Description: ...
             this.teamName = pTeamName;
         }
 
-        //Getters and setters 
+        //gets team name
         getTeam(){
             return this.teamName;
         }
+
+        //sets team name
         setTeam(myTeamName){
             this.teamName = myTeamName;
         }
-        //Confused as to how this one is different from the calculate one.
-        //Double check this.. may have made an error or the wording is just off.
+
+        //Sets wins and losses as well as win-loss percentage
         setWinsLosses(myWins, myLosses){
             this.wins = this.wins + myWins;
             this.losses = this.losses + myLosses;
             this.winLossPct = (this.wins / (this.wins + this.losses));
         }
+
+        //gets amount of wins
         getWins(){
             return this.wins;
         }
+
+        //gets amount of losses
         getLosses(){
             return this.losses;
         }
-        //I am assuming we will want to round this later
+
+        //calculates win-loss percentage
         calcWinLossPct(){
             this.winLossPct = (this.wins / (this.wins + this.losses));
         }
-
-
-
     }
-    //Create "Team" class
-        //Instance variables/attributes:
-        /*  teamName; (string)
-            wins; (int)
-            losses; (int)
-            winLossPct; (double)
-            games; (array of Game objects)
-        */
 
-        //Methods 
-        /*  getTeam - when called, returns team name
-            setTeam - when called, recieves 1 parameter used to set the "teamName"
-            setWinsLosses - when called, recieves 2 parameters used to set the "wins" and "losses";
-                            "wins" is the first parameter, "losses" is the second
-                            This method will also calculate the "winLossPct"
-            getWins - when called, return number of wins ("wins")
-            getLosses - when called, return number of losses ("losses")
-            calcWinLossPct - calculates and updates "winLossPct"
-        */
-
+    //class BasketballTeam that is a child of the Team class
     class BasketballTeam extends Team
     {
         totalPointsFor = 0;
@@ -254,12 +247,17 @@ Project Description: ...
             super(pTeamName);
         }
 
+        //method to add points to a team
         addPointsFor(pointsToAdd){
             this.totalPointsFor = this.totalPointsFor + pointsToAdd;
         }
+
+        //method to add points to teams opponent
         addPointsAgainst(oppPointsToAdd){
             this.totalPointsAgainst = this.totalPointsAgainst + oppPointsToAdd;
         }
+
+        //get all points and concatenate and set to pointOutput
         getAllPoints(){
             var pointOutput;
             pointOutput = "Points for " + this.totalPointsFor + " and Points Against " + this.totalPointsAgainst;
@@ -267,26 +265,11 @@ Project Description: ...
         }
     }
 
-    //Create "BasketballTeam" class that inherits from the "Team" class
-
-        //Make sure to call parent class!
-        //Instance Variables/Attributes
-        /*  totalPointsFor; (int)
-            totalPointsAgainst; (int)
-        */
-        //Methods
-        /*  addPointsFor - when called, receives 1 (int) parameter; this value is added to the "TotalPointsFor" attribute
-            addPointsAgainst - when called, receives 1 (int) parameter; this value is added to the "TotalPointsAgainst" attribute
-            getAllPoints = when called, return a string with the "totalPointsFor" and the "totalPointsAgainst" like this:
-                            EXAMPLE:
-                            "Points for XX and Points Against XX" 
-                            "Points for " + totalPointsFor + " and Points Against " + totalPointsAgainst
-                            */
-
+    //class Game
     class Game
     {
-        myScore = 0; //Added 0
-        theirScore = 0; //Added 0
+        myScore = 0; 
+        theirScore = 0;
         winOrLoss;
 
         constructor(ourScore, oppScore, outcome)
@@ -297,17 +280,7 @@ Project Description: ...
         }
     }
     
-    //Create "Game" class which will be an array of game objects IN the "Team" class
-        //Instance Variables/Attributes
-        /*  myScore; (int)
-            theirScore; (int)
-            winOrLoss; (string- W or L)
-        
-        This class should have a constructor that recieves all 3 parameters to populate the attributes
-            (myScore, theirScore, winOrLoss)
-        */
-
-
+        //function playGame that plays the season, each team playing each other team twice
         function playGame()
         {
             var wccTeams = ["BYU", "Gonzaga", "Loyola", "Pacific", "Pepperdine","Portland", "Saint Marys", "San Diego", "San Francisco", "Santa Clara"];
@@ -319,7 +292,6 @@ Project Description: ...
             for (var i = 0; i < wccTeams.length; i++)
             {
                 teamObjects[i] = new BasketballTeam(wccTeams[i]);
-                //alert(teamObjects[i].teamName);
             }
 
             //Each Team plays against the other 9 Teams
@@ -338,8 +310,8 @@ Project Description: ...
                         ourScore = Math.floor(Math.random()*101);
                         oppScore = Math.floor(Math.random()*101);
 
-                        //Assumes the outer Team will be at home...
-                        ourScore = ourScore + 5 //Not important, but, couldn't we just add this to the random number generator line in 233?
+                        //Assumes the iOuter Team will be at home
+                        ourScore = ourScore + 5 
 
                         //Determine whether the game was a win, loss, or tie, and adjust win counter as necessary
                         if (ourScore > oppScore)
@@ -354,7 +326,7 @@ Project Description: ...
                         {
                             //Variables relevant to the "tied" scenario
                             var bTied = true;
-                            var iOverTime = 1; //Why do we need to know how many overtimes there has been?
+                            var iOverTime = 1;
 
                             //Overtime - generate new scores and recompare until there is a win or loss
                             while (bTied == true)
@@ -392,14 +364,14 @@ Project Description: ...
                         if( outcome === "W"){
                             teamObjects[iOuter].setWinsLosses(1,0);
                             teamObjects[iInner].setWinsLosses(0,1);
-                            //Caluclate the win loss %
+                            //Caluclate the win-loss percentage
                             teamObjects[iOuter].calcWinLossPct();
                             teamObjects[iInner].calcWinLossPct();
                         }
                         else{
                             teamObjects[iOuter].setWinsLosses(0,1);
                             teamObjects[iInner].setWinsLosses(1,0);
-                            //Caluclate the win loss %
+                            //Caluclate the win-loss percentage
                             teamObjects[iOuter].calcWinLossPct();
                             teamObjects[iInner].calcWinLossPct();
                         }
@@ -408,42 +380,10 @@ Project Description: ...
                         var oppOutcome;
                         if (outcome == "W")
                             { oppOutcome = "L"; }
-                        else if (outcome == "L") //Could this just be an else statement?
+                        else if (outcome == "L") 
                             { oppOutcome = "W"; }
 
                         teamObjects[iInner].games.push(new Game(oppScore, ourScore, oppOutcome));
-
-                        
-                        /*When the game is over you will update the totalPointsFor and the totalPointsAgainst attributes 
-                        by calling the methods (NOT using the attribute).
-
-                        You will also update the wins and the losses for each team as a game is completed. 
-                        You will call the calcWinLossPct method to update the winLossPct attribute.
-
-                        You will also need to add a new game object to the games attribute for the team and make sure the constructor 
-                        is appropriately called to populate myScore, theirScore, and winOrLoss. */
-
-
-
-                        //So this is working, taking 1 team at a time and pitting them against every other team - 
-                        //assuming the iOuter team is the home team and adding the game object to that team; 
-                        //Should the game object be added to both the home team and the away team?
-                        /*
-                        alert(teamObjects[iOuter].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].myScore + "\n" + 
-                                teamObjects[iInner].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].theirScore + "\n" +
-                                teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].winOrLoss + "\n" + "\n" +
-                                "This game object is being stored to the home team: " + teamObjects[iOuter].teamName);
-
-                        alert(teamObjects[iInner].teamName + " = " + teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].myScore + "\n" +
-                                teamObjects[iOuter].teamName + " = " + teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].theirScore + "\n" + 
-                                teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].winOrLoss + "\n" + "\n" + 
-                                "This game object is being stored to the away team: " + teamObjects[iInner].teamName);
-                        */
-                        /*alert(teamObjects[iOuter].teamName + " " + teamObjects[iOuter].wins + "/" + (teamObjects[iOuter].losses + teamObjects[iOuter].wins) + " " + 
-                                teamObjects[iOuter].winLossPct + "\n" +
-                                teamObjects[iInner].teamName + " " + teamObjects[iInner].wins + "/" + (teamObjects[iInner].losses + teamObjects[iInner].wins) + " " + 
-                                teamObjects[iInner].winLossPct);
-                        */
                     }
                 }
             }
@@ -470,49 +410,14 @@ Project Description: ...
                     }
                 }
             }
+            //create output variable and concatenate the teams and their number of wins to be displayed in descending order
             var output = [];
             for (i=0; i < teamObjects.length; i++)
             {
-            output[i] = teamObjects[i].teamName + " " + teamObjects[i].wins + " " + (teamObjects[i].winLossPct * 100).toFixed(2) + "%";
+            output[i] = teamObjects[i].teamName + " with " + teamObjects[i].wins + " wins";
             }
             document.getElementById("output").innerHTML = output.join("<br>");
         }
-
-
-/*
-When the user clicks on the Play Game button you need to simulate an entire season.
-
-You will first create an array of team objects for each team displayed on the html form in the WCC group.
-
-Each team will play the other team 2 times, once as the home team and once as the visitor. 
-The home team gets an extra 5 points. You will generate random numbers for each of the teams from 0 to 100. 
-If there is a tie, you will play an overtime that generates a new random number score up to 15 points. 
-This score will be added to the previous score. Do NOT add the extra bonus of 5 points for home teams during the overtime portion. 
-If there is another tie, do another overtime period generating 2 new random numbers and adding it to the total score. 
-Keep doing this until there is no tie.
-
-When the game is over you will update the totalPointsFor and the totalPointsAgainst attributes 
-by calling the methods (NOT using the attribute).
-
-You will also update the wins and the losses for each team as a game is completed. 
-You will call the calcWinLossPct method to update the winLossPct attribute.
-
-You will also need to add a new game object to the games attribute for the team and make sure the constructor 
-is appropriately called to populate myScore, theirScore, and winOrLoss.
-
-Each team will play the other teams in the list 2 times but they will not play each other more than that.
-
-Once the season is over you will sort the arrays based upon the wins and display all of the teams 
-dynamically to the output "p" tag.
-
-Make sure you use arrays of objects. Make sure you add appropriate comments. 
-The assignment requirements are worth 90% so go the extra mile and make it look good for the extra 10 points.
-
-Only 1 per team needs to be submitted. Do NOT submit more than that. 
-Only people that worked on the project get their name in the submission box for the group.
-*/
     </script>
-
-
 </body>
 </html>
