@@ -473,7 +473,7 @@ Project Description: ...
             var output = [];
             for (i=0; i < teamObjects.length; i++)
             {
-            output[i] = teamObjects[i].teamName + " " + teamObjects[i].wins + " " + (teamObjects[i].winLossPct * 100).toFixed(2) + "%";
+            output[i] = teamObjects[i].teamName + " with " + teamObjects[i].wins + " wins"/* + (teamObjects[i].winLossPct * 100).toFixed(2) + "%"*/;
             }
             document.getElementById("output").innerHTML = output.join("<br>");
         }
