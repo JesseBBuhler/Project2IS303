@@ -198,9 +198,9 @@ Project Description: This program creates team, basketballTeam, and game classes
         winLossPct = 0;
         games = [];
 
-        constructor(pTeamName) 
+        constructor(teamName) 
         {
-            this.teamName = pTeamName;
+            this.teamName = teamName;
         }
 
         //gets team name
@@ -242,9 +242,9 @@ Project Description: This program creates team, basketballTeam, and game classes
         totalPointsFor = 0;
         totalPointsAgainst = 0;
         
-        constructor(pTeamName)
+        constructor(teamName)
         {
-            super(pTeamName);
+            super(teamName);
         }
 
         //method to add points to a team
@@ -285,8 +285,8 @@ Project Description: This program creates team, basketballTeam, and game classes
         {
             var wccTeams = ["BYU", "Gonzaga", "Loyola", "Pacific", "Pepperdine","Portland", "Saint Marys", "San Diego", "San Francisco", "Santa Clara"];
             var teamObjects = [];
-            var iOuter;
-            var iInner;
+            var outer;
+            var inner;
 
             //Creates an array of BasketballTeam objects using the given Team names
             for (var i = 0; i < wccTeams.length; i++)
@@ -295,16 +295,16 @@ Project Description: This program creates team, basketballTeam, and game classes
             }
 
             //Each Team plays against the other 9 Teams
-            for (iOuter = 0; iOuter < teamObjects.length; iOuter++)
+            for (outer = 0; outer < teamObjects.length; outer++)
             {
-                for (iInner = 0; iInner < teamObjects.length; iInner++)
+                for (inner = 0; inner < teamObjects.length; inner++)
                 {
                     //Can't have the Team play itself
-                    if (iInner != iOuter)
+                    if (inner != outer)
                     {
                         var ourScore;
                         var oppScore;
-                        var iCount; 
+                        var count; 
                         var outcome;
 
                         ourScore = Math.floor(Math.random()*101);
@@ -325,11 +325,11 @@ Project Description: This program creates team, basketballTeam, and game classes
                         else 
                         {
                             //Variables relevant to the "tied" scenario
-                            var bTied = true;
-                            var iOverTime = 1;
+                            var tied = true;
+                            var overTime = 1; 
 
                             //Overtime - generate new scores and recompare until there is a win or loss
-                            while (bTied == true)
+                            while (tied == true)
                             {
                                 ourScore = ourScore + Math.floor(Math.random()*16);
                                 oppScore = oppScore + Math.floor(Math.random()*16);
@@ -337,43 +337,43 @@ Project Description: This program creates team, basketballTeam, and game classes
                                 if (ourScore > oppScore)
                                 {  
                                     outcome = "W"
-                                    bTied = false;
+                                    tied = false;
                                 }
                                 else if (ourScore < oppScore)
                                 { 
                                     outcome = "L"
-                                    bTied = false;
+                                    tied = false;
                                 }
                                 //If scores are still tied, loop is not broken and teams go into overtime again
                                 else 
-                                { iOverTime = iOverTime + 1; }
+                                { overTime = overTime + 1; }
                             }
                         }
                         //Saves game to the home team
-                        teamObjects[iOuter].games.push(new Game(ourScore, oppScore, outcome));
+                        teamObjects[outer].games.push(new Game(ourScore, oppScore, outcome));
 
                         //Add points for and against to the home team.
-                        teamObjects[iOuter].addPointsFor(ourScore);
-                        teamObjects[iOuter].addPointsAgainst(oppScore);
+                        teamObjects[outer].addPointsFor(ourScore);
+                        teamObjects[outer].addPointsAgainst(oppScore);
 
                         //Add points for and against to the away team.
-                        teamObjects[iInner].addPointsFor(oppScore);
-                        teamObjects[iInner].addPointsAgainst(ourScore);
+                        teamObjects[inner].addPointsFor(oppScore);
+                        teamObjects[inner].addPointsAgainst(ourScore);
 
                         //Updates the wins and losses for both teams
                         if( outcome === "W"){
-                            teamObjects[iOuter].setWinsLosses(1,0);
-                            teamObjects[iInner].setWinsLosses(0,1);
-                            //Caluclate the win-loss percentage
-                            teamObjects[iOuter].calcWinLossPct();
-                            teamObjects[iInner].calcWinLossPct();
+                            teamObjects[outer].setWinsLosses(1,0);
+                            teamObjects[inner].setWinsLosses(0,1);
+                            //Caluclate the win loss percentage
+                            teamObjects[outer].calcWinLossPct();
+                            teamObjects[inner].calcWinLossPct();
                         }
                         else{
-                            teamObjects[iOuter].setWinsLosses(0,1);
-                            teamObjects[iInner].setWinsLosses(1,0);
-                            //Caluclate the win-loss percentage
-                            teamObjects[iOuter].calcWinLossPct();
-                            teamObjects[iInner].calcWinLossPct();
+                            teamObjects[outer].setWinsLosses(0,1);
+                            teamObjects[inner].setWinsLosses(1,0);
+                            //Caluclate the win loss percentage
+                            teamObjects[outer].calcWinLossPct();
+                            teamObjects[inner].calcWinLossPct();
                         }
 
                         //Save game to the away team
@@ -383,29 +383,31 @@ Project Description: This program creates team, basketballTeam, and game classes
                         else if (outcome == "L") 
                             { oppOutcome = "W"; }
 
-                        teamObjects[iInner].games.push(new Game(oppScore, ourScore, oppOutcome));
+                        teamObjects[inner].games.push(new Game(oppScore, ourScore, oppOutcome));
+
+                        
                     }
                 }
             }
 
             //Bubble sort
-            var sHoldTeam;
-            var iHoldWins;
-            for (i1 = 0; i1 < teamObjects.length - 1; i1++)
+            var holdTeam;
+            var holdWins;
+            for (i = 0; i < teamObjects.length - 1; i++)
             {
-                for (i2 = i1 + 1; i2 < teamObjects.length; i2++)
+                for (j = i + 1; j < teamObjects.length; j++)
                 {
-                    if (teamObjects[i1].getWins() < teamObjects[i2].getWins())
+                    if (teamObjects[i].getWins() < teamObjects[j].getWins())
                     {
 
                         //Set hold for team that is getting moved up
-                        iHoldWins = teamObjects[i2];
+                        holdWins = teamObjects[j];
                         
                         //Move team that needs to be moved down
-                        teamObjects[i2] = teamObjects[i1];
+                        teamObjects[j] = teamObjects[i];
                         
                         //Move team that needs to be moved up using the holding variable
-                        teamObjects[i1] = iHoldWins;
+                        teamObjects[i] = holdWins;
                         
                     }
                 }
