@@ -312,8 +312,8 @@ Project Description: ...
         {
             var wccTeams = ["BYU", "Gonzaga", "Loyola", "Pacific", "Pepperdine","Portland", "Saint Marys", "San Diego", "San Francisco", "Santa Clara"];
             var teamObjects = [];
-            var iOuter;
-            var iInner;
+            var outer;
+            var inner;
 
             //Creates an array of BasketballTeam objects using the given Team names
             for (var i = 0; i < wccTeams.length; i++)
@@ -323,16 +323,16 @@ Project Description: ...
             }
 
             //Each Team plays against the other 9 Teams
-            for (iOuter = 0; iOuter < teamObjects.length; iOuter++)
+            for (outer = 0; outer < teamObjects.length; outer++)
             {
-                for (iInner = 0; iInner < teamObjects.length; iInner++)
+                for (inner = 0; inner < teamObjects.length; inner++)
                 {
                     //Can't have the Team play itself
-                    if (iInner != iOuter)
+                    if (inner != outer)
                     {
                         var ourScore;
                         var oppScore;
-                        var iCount; 
+                        var count; 
                         var outcome;
 
                         ourScore = Math.floor(Math.random()*101);
@@ -378,30 +378,30 @@ Project Description: ...
                             }
                         }
                         //Saves game to the home team
-                        teamObjects[iOuter].games.push(new Game(ourScore, oppScore, outcome));
+                        teamObjects[outer].games.push(new Game(ourScore, oppScore, outcome));
 
                         //Add points for and against to the home team.
-                        teamObjects[iOuter].addPointsFor(ourScore);
-                        teamObjects[iOuter].addPointsAgainst(oppScore);
+                        teamObjects[outer].addPointsFor(ourScore);
+                        teamObjects[outer].addPointsAgainst(oppScore);
 
                         //Add points for and against to the away team.
-                        teamObjects[iInner].addPointsFor(oppScore);
-                        teamObjects[iInner].addPointsAgainst(ourScore);
+                        teamObjects[inner].addPointsFor(oppScore);
+                        teamObjects[inner].addPointsAgainst(ourScore);
 
                         //Updates the wins and losses for both teams
                         if( outcome === "W"){
-                            teamObjects[iOuter].setWinsLosses(1,0);
-                            teamObjects[iInner].setWinsLosses(0,1);
+                            teamObjects[outer].setWinsLosses(1,0);
+                            teamObjects[inner].setWinsLosses(0,1);
                             //Caluclate the win loss %
-                            teamObjects[iOuter].calcWinLossPct();
-                            teamObjects[iInner].calcWinLossPct();
+                            teamObjects[outer].calcWinLossPct();
+                            teamObjects[inner].calcWinLossPct();
                         }
                         else{
-                            teamObjects[iOuter].setWinsLosses(0,1);
-                            teamObjects[iInner].setWinsLosses(1,0);
+                            teamObjects[outer].setWinsLosses(0,1);
+                            teamObjects[inner].setWinsLosses(1,0);
                             //Caluclate the win loss %
-                            teamObjects[iOuter].calcWinLossPct();
-                            teamObjects[iInner].calcWinLossPct();
+                            teamObjects[outer].calcWinLossPct();
+                            teamObjects[inner].calcWinLossPct();
                         }
 
                         //Save game to the away team
@@ -411,7 +411,7 @@ Project Description: ...
                         else if (outcome == "L") //Could this just be an else statement?
                             { oppOutcome = "W"; }
 
-                        teamObjects[iInner].games.push(new Game(oppScore, ourScore, oppOutcome));
+                        teamObjects[inner].games.push(new Game(oppScore, ourScore, oppOutcome));
 
                         
                         /*When the game is over you will update the totalPointsFor and the totalPointsAgainst attributes 
@@ -426,31 +426,31 @@ Project Description: ...
 
 
                         //So this is working, taking 1 team at a time and pitting them against every other team - 
-                        //assuming the iOuter team is the home team and adding the game object to that team; 
+                        //assuming the outer team is the home team and adding the game object to that team; 
                         //Should the game object be added to both the home team and the away team?
                         /*
-                        alert(teamObjects[iOuter].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].myScore + "\n" + 
-                                teamObjects[iInner].teamName + " = " + teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].theirScore + "\n" +
-                                teamObjects[iOuter].games[(teamObjects[iOuter].games.length - 1)].winOrLoss + "\n" + "\n" +
-                                "This game object is being stored to the home team: " + teamObjects[iOuter].teamName);
+                        alert(teamObjects[outer].teamName + " = " + teamObjects[outer].games[(teamObjects[outer].games.length - 1)].myScore + "\n" + 
+                                teamObjects[inner].teamName + " = " + teamObjects[outer].games[(teamObjects[outer].games.length - 1)].theirScore + "\n" +
+                                teamObjects[outer].games[(teamObjects[outer].games.length - 1)].winOrLoss + "\n" + "\n" +
+                                "This game object is being stored to the home team: " + teamObjects[outer].teamName);
 
-                        alert(teamObjects[iInner].teamName + " = " + teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].myScore + "\n" +
-                                teamObjects[iOuter].teamName + " = " + teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].theirScore + "\n" + 
-                                teamObjects[iInner].games[(teamObjects[iInner].games.length - 1)].winOrLoss + "\n" + "\n" + 
-                                "This game object is being stored to the away team: " + teamObjects[iInner].teamName);
+                        alert(teamObjects[inner].teamName + " = " + teamObjects[inner].games[(teamObjects[inner].games.length - 1)].myScore + "\n" +
+                                teamObjects[outer].teamName + " = " + teamObjects[inner].games[(teamObjects[inner].games.length - 1)].theirScore + "\n" + 
+                                teamObjects[inner].games[(teamObjects[inner].games.length - 1)].winOrLoss + "\n" + "\n" + 
+                                "This game object is being stored to the away team: " + teamObjects[inner].teamName);
                         */
-                        /*alert(teamObjects[iOuter].teamName + " " + teamObjects[iOuter].wins + "/" + (teamObjects[iOuter].losses + teamObjects[iOuter].wins) + " " + 
-                                teamObjects[iOuter].winLossPct + "\n" +
-                                teamObjects[iInner].teamName + " " + teamObjects[iInner].wins + "/" + (teamObjects[iInner].losses + teamObjects[iInner].wins) + " " + 
-                                teamObjects[iInner].winLossPct);
+                        /*alert(teamObjects[outer].teamName + " " + teamObjects[outer].wins + "/" + (teamObjects[outer].losses + teamObjects[outer].wins) + " " + 
+                                teamObjects[outer].winLossPct + "\n" +
+                                teamObjects[inner].teamName + " " + teamObjects[inner].wins + "/" + (teamObjects[inner].losses + teamObjects[inner].wins) + " " + 
+                                teamObjects[inner].winLossPct);
                         */
                     }
                 }
             }
 
             //Bubble sort
-            var sHoldTeam;
-            var iHoldWins;
+            var holdTeam;
+            var holdWins;
             for (i1 = 0; i1 < teamObjects.length - 1; i1++)
             {
                 for (i2 = i1 + 1; i2 < teamObjects.length; i2++)
@@ -459,13 +459,13 @@ Project Description: ...
                     {
 
                         //Set hold for team that is getting moved up
-                        iHoldWins = teamObjects[i2];
+                        holdWins = teamObjects[i2];
                         
                         //Move team that needs to be moved down
                         teamObjects[i2] = teamObjects[i1];
                         
                         //Move team that needs to be moved up using the holding variable
-                        teamObjects[i1] = iHoldWins;
+                        teamObjects[i1] = holdWins;
                         
                     }
                 }
