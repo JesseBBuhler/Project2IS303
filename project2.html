@@ -451,21 +451,21 @@ Project Description: ...
             //Bubble sort
             var holdTeam;
             var holdWins;
-            for (i1 = 0; i1 < teamObjects.length - 1; i1++)
+            for (i = 0; i < teamObjects.length - 1; i++)
             {
-                for (i2 = i1 + 1; i2 < teamObjects.length; i2++)
+                for (j = i + 1; j < teamObjects.length; j++)
                 {
-                    if (teamObjects[i1].getWins() < teamObjects[i2].getWins())
+                    if (teamObjects[i].getWins() < teamObjects[j].getWins())
                     {
 
                         //Set hold for team that is getting moved up
-                        holdWins = teamObjects[i2];
+                        holdWins = teamObjects[j];
                         
                         //Move team that needs to be moved down
-                        teamObjects[i2] = teamObjects[i1];
+                        teamObjects[j] = teamObjects[i];
                         
                         //Move team that needs to be moved up using the holding variable
-                        teamObjects[i1] = holdWins;
+                        teamObjects[i] = holdWins;
                         
                     }
                 }
