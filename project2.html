@@ -191,9 +191,9 @@ Project Description: ...
         winLossPct = 0;
         games = [];
 
-        constructor(pTeamName) 
+        constructor(teamName) 
         {
-            this.teamName = pTeamName;
+            this.teamName = teamName;
         }
 
         //Getters and setters 
@@ -249,9 +249,9 @@ Project Description: ...
         totalPointsFor = 0;
         totalPointsAgainst = 0;
         
-        constructor(pTeamName)
+        constructor(teamName)
         {
-            super(pTeamName);
+            super(teamName);
         }
 
         addPointsFor(pointsToAdd){
@@ -354,7 +354,7 @@ Project Description: ...
                         {
                             //Variables relevant to the "tied" scenario
                             var tied = true;
-                            var iOverTime = 1; //Why do we need to know how many overtimes there has been?
+                            var overTime = 1; //Why do we need to know how many overtimes there has been?
 
                             //Overtime - generate new scores and recompare until there is a win or loss
                             while (tied == true)
@@ -374,7 +374,7 @@ Project Description: ...
                                 }
                                 //If scores are still tied, loop is not broken and teams go into overtime again
                                 else 
-                                { iOverTime = iOverTime + 1; }
+                                { overTime = overTime + 1; }
                             }
                         }
                         //Saves game to the home team
